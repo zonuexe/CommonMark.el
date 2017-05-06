@@ -110,24 +110,38 @@ Original spec regexp is follows:
 
 
 ;; Font lock
+(defconst commonmark-regexp-heading-level-1
+  "^\\(#\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+(defconst commonmark-regexp-heading-level-2
+  "^\\(##\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+(defconst commonmark-regexp-heading-level-3
+  "^\\(###\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+(defconst commonmark-regexp-heading-level-4
+  "^\\(####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+(defconst commonmark-regexp-heading-level-5
+  "^\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+(defconst commonmark-regexp-heading-level-6
+  "^\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
+
 (defconst commonmark-font-lock
-  (list
-   ;; ATX headings
-   '("^\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-6)
-   '("^\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-5)
-   '("^\\(####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-4)
-   '("^\\(###\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-3)
-   '("^\\(##\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-2)
-   '("^\\(#\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-1)
-   '("``.*?``"   0 'commonmark-inline-code-face)
-   '("`[^`\n]*`" 0 'commonmark-inline-code-face)
-   `(,(rx (group "[" (* (not (any "]"))) "]") "("
-             (group (* (not (any " "))))
-             (? (+ " ") (group "\"" (* (not (any "\""))) "\""))
-             ")")
-     (1 'commonmark-link-text)
-     (2 'commonmark-link-url)
-     (3 'commonmark-link-title))))
+  (eval-when-compile
+    (list
+     ;; ATX headings
+     `(,commonmark-regexp-heading-level-6 1 'commonmark-level-6)
+     `(,commonmark-regexp-heading-level-5 1 'commonmark-level-5)
+     `(,commonmark-regexp-heading-level-4 1 'commonmark-level-4)
+     `(,commonmark-regexp-heading-level-3 1 'commonmark-level-3)
+     `(,commonmark-regexp-heading-level-2 1 'commonmark-level-2)
+     `(,commonmark-regexp-heading-level-1 1 'commonmark-level-1)
+     '("``.*?``"   0 'commonmark-inline-code-face)
+     '("`[^`\n]*`" 0 'commonmark-inline-code-face)
+     `(,(rx (group "[" (* (not (any "]"))) "]") "("
+            (group (* (not (any " "))))
+            (? (+ " ") (group "\"" (* (not (any "\""))) "\""))
+            ")")
+       (1 'commonmark-link-text)
+       (2 'commonmark-link-url)
+       (3 'commonmark-link-title)))))
 
 
 ;;;###autoload
