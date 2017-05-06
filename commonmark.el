@@ -144,7 +144,7 @@ Original spec regexp is follows:
      '("``.*?``"   0 'commonmark-inline-code-face)
      '("`[^`\n]*`" 0 'commonmark-inline-code-face)
      `(,(rx (group "[" (* (not (any "]"))) "]") "("
-            (group (* (not (any " "))))
+            (group (* (not (any " " "]"))))
             (? (+ " ") (group "\"" (* (not (any "\""))) "\""))
             ")")
        (1 'commonmark-link-text)
