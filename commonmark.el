@@ -141,11 +141,11 @@ Original spec regexp is follows:
      `(,commonmark-regexp-heading-level-3 1 'commonmark-level-3)
      `(,commonmark-regexp-heading-level-2 1 'commonmark-level-2)
      `(,commonmark-regexp-heading-level-1 1 'commonmark-level-1)
-     '("``.*?``"   0 'commonmark-inline-code-face)
-     '("`[^`\n]*`" 0 'commonmark-inline-code-face)
-     `(,(rx (group "[" (* (not (any "]"))) "]") "("
-            (group (* (not (any " " "]"))))
-            (? (+ " ") (group "\"" (* (not (any "\""))) "\""))
+     '("``[^`\n]+?``"   0 'commonmark-inline-code-face)
+     '("`[^`\n]+`" 0 'commonmark-inline-code-face)
+     `(,(rx (group "[" (* (not (any "\n" "]"))) "]") "("
+            (group (* (not (any "\n" " " "]"))))
+            (? (+ " ") (group "\"" (* (not (any "\n" "\""))) "\""))
             ")")
        (1 'commonmark-link-text)
        (2 'commonmark-link-url)
