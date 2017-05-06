@@ -143,6 +143,17 @@ Original spec regexp is follows:
      `(,commonmark-regexp-heading-level-1 1 'commonmark-level-1)
      '("``[^`\n]+?``"   0 'commonmark-inline-code-face)
      '("`[^`\n]+`" 0 'commonmark-inline-code-face)
+     ;; 4.7 Link reference definitions
+     `(,(rx bol
+            (group "[" (* (not (any "\n" "]"))) "]") ":"
+            (+ " ")
+            (group (* (not (any "\n" " "))))
+            (? (+ " ") (group "\"" (* (not (any "\n" "\""))) "\""))
+            (* " ") eol)
+       (1 'commonmark-link-text)
+       (2 'commonmark-link-url)
+       (3 'commonmark-link-title))
+     ;; 6.5 Links
      `(,(rx (group "[" (* (not (any "\n" "]"))) "]") "("
             (group (* (not (any "\n" " " "]"))))
             (? (+ " ") (group "\"" (* (not (any "\n" "\""))) "\""))
