@@ -17,6 +17,7 @@
 
 ;;; Code:
 
+(require 'outline)
 (require 'thingatpt)
 
 
@@ -31,7 +32,14 @@
   :type '(choice (const :tag "Plain CommonMark mode" commonmark-markdown-mode)
                  (const :tag "CommonMark GFM Markdown mode" commonmark-gfm-mode)
                  (function "Major mode function")))
+
+(defcustom commonmark-enable-outline-mode t
+  "Enable `outline-mode' if the value is T.")
+
 ;; Variables
+
+(defvar commonmark-markdown-mode-hook (list 'outline-minor-mode))
+
 (defconst commonmark-goto-address-mail-regexp
   (eval-when-compile
     (rx (+ (any "a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-"))
@@ -143,6 +151,15 @@ Original spec regexp is follows:
        (2 'commonmark-link-url)
        (3 'commonmark-link-title)))))
 
+;; Variables
+(defvar commonmark-outline-heading-alist
+  '(("# "      . 1)
+    ("## "     . 2)
+    ("### "    . 3)
+    ("#### "   . 4)
+    ("##### "  . 5)
+    ("###### " . 6)))
+
 
 ;;;###autoload
 (defun commonmark-mode ()
@@ -157,7 +174,15 @@ Original spec regexp is follows:
   (setq-local goto-address-url-regexp commonmark-goto-address-url-regexp)
   (setq-local goto-address-mail-regexp commonmark-goto-address-mail-regexp)
 
-  (setq font-lock-defaults '(commonmark-font-lock)))
+  ;; outline
+  (setq outline-heading-alist commonmark-outline-heading-alist)
+  (setq outline-regexp
+        (concat "^" (regexp-opt (mapcar 'car commonmark-outline-heading-alist))))
+
+  (setq font-lock-defaults '(commonmark-font-lock))
+
+  (when commonmark-enable-outline-mode
+    (outline-minor-mode)))
 
 ;;;###autoload
 (define-derived-mode commonmark-gfm-mode commonmark-markdown-mode "CmGFM"
