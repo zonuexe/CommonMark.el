@@ -144,7 +144,6 @@ Original spec regexp is follows:
      '("^[ 	]\\{0,3\\}\\*[* 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
      '("^[ 	]\\{0,3\\}-[- 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
      '("^[ 	]\\{0,3\\}-[_ 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
-     '("~[^\n~]+?~" 0 '(:strike-through t))
      ;; 4.2 ATX headings
      '("^[ 	]\\{0,3\\}\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-6)
      '("^[ 	]\\{0,3\\}\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-5)
@@ -152,8 +151,6 @@ Original spec regexp is follows:
      '("^[ 	]\\{0,3\\}\\(###\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-3)
      '("^[ 	]\\{0,3\\}\\(##\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-2)
      '("^[ 	]\\{0,3\\}\\(#\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-1)
-     '("``[^`\n]+?``"   0 'commonmark-inline-code-face)
-     '("`[^`\n]+`" 0 'commonmark-inline-code-face)
      ;; 4.7 Link reference definitions
      `(,(rx bol
             (group "[" (* (not (any "\n" "]"))) "]") ":"
@@ -183,7 +180,12 @@ Original spec regexp is follows:
             ")")
        (1 'commonmark-link-text)
        (2 'commonmark-link-url)
-       (3 'commonmark-link-title)))))
+       (3 'commonmark-link-title))
+     '("~[^\n~]+?~" 0 '(:strike-through t) t)
+     '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\w+?\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
+     '("\\(?:^\\|[^\n*]\\)\\(\\*\\w+?\\*\\)\\(?:[^\n*]\\|$\\)" 1 'italic t)
+     '("``[^\n`]+?``" 0 'commonmark-inline-code-face t)
+     '("`[^\n`]+`" 0 'commonmark-inline-code-face t))))
 
 ;; Variables
 (defvar commonmark-outline-heading-alist
