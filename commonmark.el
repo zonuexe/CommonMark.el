@@ -137,7 +137,7 @@ Original spec regexp is follows:
 
 
 ;; Font lock
-(defconst commonmark-font-lock
+(defconst commonmark-font-lock-keywords
   (eval-when-compile
     (list
      ;; 4.1 Thematic breaks
@@ -219,7 +219,7 @@ Original spec regexp is follows:
   (setq outline-regexp
         (concat "^" (regexp-opt (mapcar 'car commonmark-outline-heading-alist))))
 
-  (setq font-lock-defaults '(commonmark-font-lock))
+  (setq font-lock-defaults '(commonmark-font-lock-keywords))
 
   (when commonmark-enable-outline-mode
     (outline-minor-mode)))
