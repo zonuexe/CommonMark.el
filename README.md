@@ -14,6 +14,8 @@ This mode is compatible follows minor modes:
 
  * [`outline-minor-mode`][outline-mode]
  * [`goto-address-mode`][goto-address]
+ * [`org-table-mode`][org-orgtbl] (orgtbl, org-mode built-in table editor)
 
 [outline-mode]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Outline-Mode.html
 [goto-address]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Goto-Address-mode.html
+[org-orgtbl]: http://orgmode.org/manual/Tables.html
