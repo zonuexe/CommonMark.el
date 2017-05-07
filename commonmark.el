@@ -131,11 +131,11 @@ Original spec regexp is follows:
   "Face for link titles."
   :group 'commonmark-faces)
 
-(defface commonmark-inline-code-face '((t :inherit shadow))
+(defface commonmark-inline-code '((t :inherit shadow))
   "Face for fixed-with text like code snippets."
   :group 'commonmark-faces)
 
-(defface commonmark-thematic-break-face '((t :strike-through t))
+(defface commonmark-thematic-break '((t :strike-through t))
   "Face for thematic break (<hr />)."
   :group 'commonmark-faces)
 
@@ -149,9 +149,9 @@ Original spec regexp is follows:
   (eval-when-compile
     (list
      ;; 4.1 Thematic breaks
-     '("^[ 	]\\{0,3\\}\\*[* 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
-     '("^[ 	]\\{0,3\\}-[- 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
-     '("^[ 	]\\{0,3\\}-[_ 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
+     '("^[ 	]\\{0,3\\}\\*[* 	]\\{2,\\}$" 0 'commonmark-thematic-break)
+     '("^[ 	]\\{0,3\\}-[- 	]\\{2,\\}$" 0 'commonmark-thematic-break)
+     '("^[ 	]\\{0,3\\}-[_ 	]\\{2,\\}$" 0 'commonmark-thematic-break)
      ;; 4.2 ATX headings
      '("^[ 	]\\{0,3\\}\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-6)
      '("^[ 	]\\{0,3\\}\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-5)
@@ -199,8 +199,8 @@ Original spec regexp is follows:
      '("~[^\n~]+?~" 0 '(:strike-through t) t)
      '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\w+?\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
      '("\\(?:^\\|[^\n*]\\)\\(\\*\\w+?\\*\\)\\(?:[^\n*]\\|$\\)" 1 'italic t)
-     '("``[^\n`]+?``" 0 'commonmark-inline-code-face t)
-     '("`[^\n`]+`" 0 'commonmark-inline-code-face t))))
+     '("``[^\n`]+?``" 0 'commonmark-inline-code t)
+     '("`[^\n`]+`" 0 'commonmark-inline-code t))))
 
 ;; Variables
 (defvar commonmark-outline-heading-alist
