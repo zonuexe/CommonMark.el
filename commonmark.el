@@ -194,7 +194,7 @@ Original spec regexp is follows:
        (1 'commonmark-link-text)
        (2 'commonmark-link-url))
      ;; HTML Comment
-     '("<!--\\s +\\(\\(?:.\\|\n\\)+?\\s +\\)?-->" 0 'commonmark-html-comment)
+     '("<!--\\(.\\|\n\\)+?-->" 0 'commonmark-html-comment)
 
      '("~[^\n~]+?~" 0 '(:strike-through t) t)
      '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\w+?\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
