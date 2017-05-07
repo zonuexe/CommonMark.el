@@ -139,6 +139,10 @@ Original spec regexp is follows:
   "Face for thematic break (<hr />)."
   :group 'commonmark-faces)
 
+(defface commonmark-html-comment '((t :inherit font-lock-comment-face))
+  "Face for HTML comment block (<!-- -->)"
+  :group 'commonmark-faces)
+
 
 ;; Font lock
 (defconst commonmark-font-lock-keywords
@@ -189,6 +193,9 @@ Original spec regexp is follows:
             "[" (group (* (not (any "\n" " " "]")))) "]")
        (1 'commonmark-link-text)
        (2 'commonmark-link-url))
+     ;; HTML Comment
+     '("<!--\\s +\\(\\(?:.\\|\n\\)+?\\s +\\)?-->" 0 'commonmark-html-comment)
+
      '("~[^\n~]+?~" 0 '(:strike-through t) t)
      '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\w+?\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
      '("\\(?:^\\|[^\n*]\\)\\(\\*\\w+?\\*\\)\\(?:[^\n*]\\|$\\)" 1 'italic t)
