@@ -159,7 +159,14 @@ Original spec regexp is follows:
             (group "[" (* (not (any "\n" "]"))) "]") ":"
             (+ " ")
             (group (* (not (any "\n" " "))))
-            (? (+ " ") (group "\"" (* (not (any "\n" "\""))) "\""))
+            (* " ") eol)
+       (1 'commonmark-link-text)
+       (2 'commonmark-link-url))
+     `(,(rx bol
+            (group "[" (* (not (any "\n" "]"))) "]") ":"
+            (+ " ")
+            (group (* (not (any "\n" " "))))
+            (+ " ") (group "\"" (* (not (any "\n" "\""))) "\"")
             (* " ") eol)
        (1 'commonmark-link-text)
        (2 'commonmark-link-url)
@@ -167,7 +174,12 @@ Original spec regexp is follows:
      ;; 6.5 Links
      `(,(rx (group "[" (* (not (any "\n" "]"))) "]") "("
             (group (* (not (any "\n" " " "]"))))
-            (? (+ " ") (group "\"" (* (not (any "\n" "\""))) "\""))
+            ")")
+       (1 'commonmark-link-text)
+       (2 'commonmark-link-url))
+     `(,(rx (group "[" (* (not (any "\n" "]"))) "]") "("
+            (group (* (not (any "\n" " " "]"))))
+            (+ " ") (group "\"" (* (not (any "\n" "\""))) "\"")
             ")")
        (1 'commonmark-link-text)
        (2 'commonmark-link-url)
