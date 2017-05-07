@@ -122,19 +122,6 @@ Original spec regexp is follows:
 
 
 ;; Font lock
-(defconst commonmark-regexp-heading-level-1
-  "^\\(#\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-(defconst commonmark-regexp-heading-level-2
-  "^\\(##\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-(defconst commonmark-regexp-heading-level-3
-  "^\\(###\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-(defconst commonmark-regexp-heading-level-4
-  "^\\(####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-(defconst commonmark-regexp-heading-level-5
-  "^\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-(defconst commonmark-regexp-heading-level-6
-  "^\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$")
-
 (defconst commonmark-font-lock
   (eval-when-compile
     (list
@@ -143,13 +130,13 @@ Original spec regexp is follows:
      '("^[ 	]\\{0,3\\}-[- 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
      '("^[ 	]\\{0,3\\}-[_ 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
      '("~[^\n~]+?~" 0 '(:strike-through t))
-     ;; ATX headings
-     `(,commonmark-regexp-heading-level-6 1 'commonmark-level-6)
-     `(,commonmark-regexp-heading-level-5 1 'commonmark-level-5)
-     `(,commonmark-regexp-heading-level-4 1 'commonmark-level-4)
-     `(,commonmark-regexp-heading-level-3 1 'commonmark-level-3)
-     `(,commonmark-regexp-heading-level-2 1 'commonmark-level-2)
-     `(,commonmark-regexp-heading-level-1 1 'commonmark-level-1)
+     ;; 4.2 ATX headings
+     '("^[ 	]\\{0,3\\}\\(######\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-6)
+     '("^[ 	]\\{0,3\\}\\(#####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-5)
+     '("^[ 	]\\{0,3\\}\\(####\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-4)
+     '("^[ 	]\\{0,3\\}\\(###\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-3)
+     '("^[ 	]\\{0,3\\}\\(##\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-2)
+     '("^[ 	]\\{0,3\\}\\(#\\([ 	]+.+?\\)?\\)\\(?:[ 	]+#*[ 	]*\\)?$" 1 'commonmark-level-1)
      '("``[^`\n]+?``"   0 'commonmark-inline-code-face)
      '("`[^`\n]+`" 0 'commonmark-inline-code-face)
      ;; 4.7 Link reference definitions
