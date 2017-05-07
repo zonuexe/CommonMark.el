@@ -223,7 +223,12 @@ Original spec regexp is follows:
   (setq outline-regexp
         (concat "^" (regexp-opt (mapcar 'car commonmark-outline-heading-alist))))
 
+  ;; font-lock.el / font-core.el
   (setq font-lock-defaults '(commonmark-font-lock-keywords))
+
+  ;; newcomment.el
+  (setq comment-start "<!--")
+  (setq comment-end "-->")
 
   (when commonmark-enable-outline-mode
     (outline-minor-mode)))
