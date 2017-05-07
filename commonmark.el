@@ -32,6 +32,7 @@
 
 ;;; Code:
 
+(require 'org-table nil t)
 (require 'outline)
 (require 'thingatpt)
 
@@ -50,6 +51,9 @@
 
 (defcustom commonmark-enable-outline-mode t
   "Enable `outline-mode' if the value is T.")
+
+(defcustom commonmark-gfm-enable-orgtbl-mode (featurep 'org-table)
+  "Enable `orgtbl-mode' if the value is T.")
 
 ;; Variables
 
@@ -226,7 +230,9 @@ Original spec regexp is follows:
 
 ;;;###autoload
 (define-derived-mode commonmark-gfm-mode commonmark-markdown-mode "CmGFM"
-  "Major mode for editing GitHub Flavored Markdown.")
+  "Major mode for editing GitHub Flavored Markdown."
+  (when commonmark-gfm-enable-orgtbl-mode
+    (orgtbl-mode)))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.md\\'" . commonmark-mode))
