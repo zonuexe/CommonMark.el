@@ -116,6 +116,10 @@ Original spec regexp is follows:
   "Face for fixed-with text like code snippets."
   :group 'commonmark-faces)
 
+(defface commonmark-thematic-break-face '((t :strike-through t))
+  "Face for thematic break (<hr />)."
+  :group 'commonmark-faces)
+
 
 ;; Font lock
 (defconst commonmark-regexp-heading-level-1
@@ -134,6 +138,11 @@ Original spec regexp is follows:
 (defconst commonmark-font-lock
   (eval-when-compile
     (list
+     ;; 4.1 Thematic breaks
+     '("^[ 	]\\{0,3\\}\\*[* 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
+     '("^[ 	]\\{0,3\\}-[- 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
+     '("^[ 	]\\{0,3\\}-[_ 	]\\{2,\\}$" 0 'commonmark-thematic-break-face)
+     '("~[^\n~]+?~" 0 '(:strike-through t))
      ;; ATX headings
      `(,commonmark-regexp-heading-level-6 1 'commonmark-level-6)
      `(,commonmark-regexp-heading-level-5 1 'commonmark-level-5)
