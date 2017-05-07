@@ -6,7 +6,7 @@ http://spec.commonmark.org/0.27/#example-4
 
   - foo
 
-→bar
+	bar
 
 ## output
 
