@@ -76,7 +76,7 @@ Original spec regexp is follows:
 (?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/")
 
 (defconst commonmark-url-path-regexp
-  "[^]\t\n \"'<>[^`{}]*[^]\t\n \"'<>[^`{}.,;)]+"
+  "[^]\t\n \"'<>\\(?:[^`{})]\\|\\\\)\\)*[^]\t\n \"'<>[^`{}.,;)]+"
   "Regexp matching the host and filename or e-mail part of a URL.")
 
 (defconst commonmark-goto-address-url-regexp
