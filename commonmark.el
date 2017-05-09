@@ -83,9 +83,7 @@ Original spec regexp is follows:
   (eval-when-compile
     (concat
      "\\<"
-     (regexp-opt (delete "mailto:"
-                         (delete "data:"
-                                 (copy-sequence thing-at-point-uri-schemes))))
+     (regexp-opt thing-at-point-uri-schemes)
      commonmark-url-path-regexp)))
 
 
