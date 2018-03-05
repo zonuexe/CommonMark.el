@@ -192,11 +192,11 @@ Original spec regexp is follows:
        (1 'commonmark-link-text)
        (2 'commonmark-link-url))
      ;; HTML Comment
-     '("<!--\\(.\\|\n\\)+?-->" 0 'commonmark-html-comment)
+     '("<!--\\(?:.\\|\n\\)+?-->" 0 'commonmark-html-comment)
 
      '("~[^\n~]+?~" 0 '(:strike-through t) t)
-     '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\w+?\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
-     '("\\(?:^\\|[^\n*]\\)\\(\\*\\w+?\\*\\)\\(?:[^\n*]\\|$\\)" 1 'italic t)
+     '("\\(?:^\\|[^\n*]\\)\\(\\*\\*\\_<.+?\\_>\\*\\*\\)\\(?:[^\n*]\\|$\\)" 1 'bold t)
+     '("\\(?:^\\|[^\n*]\\)\\(\\*\\_<.+?\\_>\\*\\)\\(?:[^\n*]\\|$\\)" 1 'italic t)
      '("\\(?:\\s(\\|\\s \\)\\(_[^\n_]+_\\)\\(?:\\s)\\|\\s \\)" 0 'italic t)
      '("``[^\n`]+?``" 0 'commonmark-inline-code t)
      '("`[^\n`]+`" 0 'commonmark-inline-code t))))
